@@ -4,7 +4,7 @@ import torch
 import typing
 
 
-def cast(*tensors: ..., to: typing.Type) -> typing.Tuple[torch.Tensor, ...]:
+def cast(*tensors: ..., to: typing.Type) -> typing.Tuple[...]:
 
     ''' Casts all input tensors to a different type. '''
     
