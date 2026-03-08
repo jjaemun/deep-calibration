@@ -110,7 +110,7 @@ class CuiCharfunc(charfunc):
 
         # variance sensitivity term.
         vsens = - (vol * A) + (2 * kappa * theta /
-                    (sigma * sigma)) * D
+                    (sigma * sigma)) * B
 
         return torch.exp(fdrift - vdrift + vsens)
 
