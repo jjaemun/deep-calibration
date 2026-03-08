@@ -32,6 +32,7 @@ class Heston(object):
         self.cf = partial(cf, spot = spot, rate = rate, kappa = kappa,
                     theta = theta, sigma = sigma, rho = rho, vol = vol)
 
+
     def price(self, option: Option, scheme: QuadratureScheme) -> f64:
 
         ''' Computes option price. '''
