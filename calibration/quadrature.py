@@ -39,13 +39,16 @@ class GaussLegendreQuadrature(QuadratureScheme):
         self.abscissa = cast(torch.from_numpy(abscissa), to = f64)
         self.weights = cast(torch.from_numpy(weights), to = f64)
 
+        self.a = a
+        self.b = b
 
-    def integrate(self, func: Callable, a: Optional[f64] = ZERO, b: Optional[f64] = UB) -> f64:
+
+    def integrate(self, func: Callable) -> f64:
 
         ''' Computes Gauss-Legendre quadrature for func. '''
 
-        width: f64 = (b - a)
-        support: f64 = (a + b)
+        width: f64 = (self.b - self.a)
+        support: f64 = (self.a + self.b)
    
         affine: torch.Tensor = (support / 2 + 
             width / 2 * self.abscissa)
