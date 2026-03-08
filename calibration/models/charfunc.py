@@ -1,13 +1,4 @@
-# -*- coding: utf-8 -*-
-
-
-import abc
-import numpy
-
-
-class charfunc(abc.ABC):
-
-    ''' Characteristic function abstraction. '''
+# -*- codi. '''
    
     @abc.abstractmethod
     def __call__(*args, **kwargs):
@@ -64,8 +55,12 @@ class DelBañoRollinCharfunc(charfunc):
 
         # log-spot forward drift term.
         fdrift = 1j * u * (numpy.log(spot) + rate * s)
+        
+        # volatility mean-reversion drift term.
         vdrift = (s * kappa * theta * rho * 
                     1j * u / sigma)
+        
+        # variance sensitivity term.
         vsens = vol * A
 
         factor = B ** (2 * kappa * theta / 
@@ -81,4 +76,28 @@ class CuiCharfunc(charfunc):
 
     def __call__(u: float, s: float, spot: float, rate: float, kappa: float, 
                  theta: float, sigma: float, rho: float, vol: float) -> complex:
-        pass
+        Q = kappa - sigma * rho * 1j * u
+        D = numpy.sqrt(Q * Q + sigma * 
+                sigma * u * (u + 1j))
+
+        A = (u * (u + 1j) * numpy.sinh(D * s / 2) /
+                numpy.exp((D * s / 2) + numpy.log(((D + Q) / 2) + 
+                    numpy.exp(-D * s) * ((D - Q) / 2))))
+
+        D = (numpy.log(D) + ((kappa - D) * s) / 2 - 
+                numpy.log(((D + Q) / 2) + 
+                    numpy.exp(-D * s) * ((D - Q) / 2)))
+
+        # log-spot forward drift term.
+        fdrift = 1j * u * (numpy.log(spot) + rate * s)
+    
+        # volatility mean-reversion drift term.
+        vdrift = (s * kappa * theta * rho * 1j * 
+                    u / sigma)
+
+        # variance sensitivity term.
+        vsens = - (vol * A) + (2 * kappa * theta /
+                    (sigma * sigma)) * D
+
+        return numpy.exp(fdrift - vdrift + vsens)
+
