@@ -21,7 +21,7 @@ class QuadratureScheme(abc.ABC):
 
 
     @abc.abstractmethod
-    def integrate(self, f: Callable, a: f64, b: f64):
+    def integrate(self, f: Callable):
         raise NotImplementedError
 
 
