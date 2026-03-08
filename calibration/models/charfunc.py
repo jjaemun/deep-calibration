@@ -48,12 +48,12 @@ class SchoutensCharfunc(charfunc):
 
 class DelBañoRollinCharfunc(charfunc):
 
- ''' Corrected (see Cui et. al. (2016) [pp.7-8]) Del Baño Rollin et. al. (2010) 
+    ''' Corrected (see Cui et. al. (2016) [pp.7-8]) Del Baño Rollin et. al. (2010) 
             modified Heston characteristic function. '''
 
     def __call__(self, spot: f64, rate: f64, kappa: f64, theta: f64, 
                  sigma: f64, rho: f64, vol: f64, u: f64, s: f64) -> c128:
-        Q = kappa - sigma * rho * 1j * u
+        Q = kappa - sigma * rho * J * u
         D = torch.sqrt(Q * Q + sigma * 
                 sigma * u * (u + J))
 
