@@ -1,8 +1,18 @@
-# -*- codi. '''
-   
+# -*- coding: utf-8 -*- 
+
+
+import abc
+import numpy
+
+
+class charfunc(abc.ABC):
+    
+    ''' Characteristic function. '''
+
     @abc.abstractmethod
     def __call__(*args, **kwargs):
         raise NotImplementedError
+
 
 
 class SchoutensCharfunc(charfunc):
