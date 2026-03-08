@@ -48,5 +48,5 @@ class Heston(object):
                 - option.strike * (common * self.cf(u, option.tenor)).real)
               
         return (intrinsic / 2 + (discount / PI) * 
-            scheme.integrate(integrand, ZERO, UB))
+            scheme.integrate(integrand))
 
