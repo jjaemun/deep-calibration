@@ -4,18 +4,6 @@
 import torch
 import typing
 
-# tensor!
-class Tensor(object):
-
-    ''' Type hinting helper. '''
-    
-    def __class_getitem__(cls, dtype: torch.dtype) -> typing.Type:
-        
-        ''' Type hinting clearly does not enforce behavior but
-                helps reason about code. '''
-
-        return typing.Annotated[torch.Tensor, dtype]
-
 
 # types!
 u16 = torch.uint16
@@ -33,3 +21,14 @@ c64 = torch.complex64
 c128 = torch.complex128
 
 
+# tensor!
+class Tensor(object):
+
+    ''' Type hinting helper. '''
+    
+    def __class_getitem__(cls, dtype: torch.dtype) -> typing.Type:
+        
+        ''' Type hinting clearly does not enforce behavior but
+                helps reason about code. '''
+
+        return typing.Annotated[torch.Tensor, dtype]
