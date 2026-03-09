@@ -2,6 +2,9 @@
 # type: ignore
 
 
+from .iterate import Iterate
+
+
 from .. import *
 
 
@@ -9,10 +12,8 @@ import abc
 import torch
 
 
-from .iterate import Iterate
+from typing import (List, Optional)
 
-
-from typing import List, Optional
 
 
 class Criterion(abc.ABC):
