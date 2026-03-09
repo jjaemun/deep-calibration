@@ -21,7 +21,7 @@ class Sampler(object):
             calibration data. '''
 
     def __init__(self, dim: i32, bounds: Mapping[str, Tuple[f64, f64]], 
-                 engine: ..., seed: Optional[int] = None):
+                 engine: ..., seed: Optional[i32] = None):
         assert len(list(bounds.keys())) == dim
 
         self.dim = dim
