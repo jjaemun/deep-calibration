@@ -2,7 +2,7 @@
 # type: ignore
 
 
-from .hints import Tensor, f64
+from .. import *
 
 import abc
 import torch
