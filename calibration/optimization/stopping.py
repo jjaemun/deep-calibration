@@ -48,7 +48,7 @@ class MaxIterations(Criterion):
     ''' Limits the number of iterations optimizer 
             can take. '''
 
-    def __init__(self, iterations: u32):
+    def __init__(self, iterations: Optional[u32] = 100):
         self.iterations = iterations
 
     def check(self, iterates: List[Iterate]):
