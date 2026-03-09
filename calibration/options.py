@@ -2,7 +2,7 @@
 # type: ignore
 
 
-from .constants import f64
+from .hints import Tensor, f64
 
 import abc
 import torch
@@ -25,7 +25,7 @@ class EuropeanCall(Option):
         self.strike = strike 
         self.tenor = tenor
 
-    def payoff(self, s: f64) -> f64:
+    def payoff(self, s: Tensor[f64]) -> Tensor[f64]:
         return torch.clamp((s - self.strike), min= 0.0)
 
 
@@ -37,5 +37,5 @@ class EuropeanPut(Option):
         self.strike = strike 
         self.tenor = tenor
 
-    def payoff(self, s: f64) -> f64:
+    def payoff(self, s: Tensor[f64]) -> Tensor[f64]:
         return torch.clamp((self.strike - s), min= 0.0)
