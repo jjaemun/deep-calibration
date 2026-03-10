@@ -15,6 +15,8 @@ from .stopping import Criterion
 import torch
 
 
+from typing import List
+
 
 class NewtonRaphson(object):
 
