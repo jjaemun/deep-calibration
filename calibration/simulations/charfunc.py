@@ -17,6 +17,33 @@ class charfunc(abc.ABC):
         raise NotImplementedError
 
 
+class HestonCharfunc(charfunc):
+
+    ''' Heston (1993) characteristic function. '''
+
+    def __call__(self, spot: f64, rate: f64, kappa: f64, theta: f64, 
+                 sigma: f64, rho: f64, vol: f64, u: f64, s: f64) -> c128:
+        Q = kappa - sigma * rho * J * u
+        D = torch.sqrt(Q * Q + sigma * 
+                sigma * u * (u + J))
+        G = (Q + D) / (Q - D)
+        
+        # log-spot forward drift term.
+        fdrift = J * u * (torch.log(spot) + rate * s)
+
+        # volatility mean-reversion drift term.
+        vdrift = ((kappa * theta) / (sigma * sigma) * 
+            ((Q + D) * s - 2 * torch.log((1 - G * 
+                torch.exp(D * s)) / (1 - G))))
+
+        # variance sensitivity term.
+        vsens = (vol / (sigma * sigma) * (Q + D) * 
+            ((1 - torch.exp(D * s)) / (1 - G * 
+                torch.exp(D * s))))                                          
+        
+        return torch.exp(fdrift + vdrift + vsens)
+
+
 class SchoutensCharfunc(charfunc):
 
     ''' Schoutens et. al. (2004), Albrecher et al. (2007)  modified Heston 
