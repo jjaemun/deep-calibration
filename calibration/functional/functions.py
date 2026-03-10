@@ -13,7 +13,7 @@ class function(abc.ABC):
         raise NotImplementedError
 
 
-class ContinuouslyDifferentiable(function):
+class Differentiable(function):
 
     ''' Continously differentiable function. '''
 
@@ -22,7 +22,7 @@ class ContinuouslyDifferentiable(function):
         raise NotImplementedError
 
 
-class TwiceContinuouslyDifferentiable(ContinuouslyDifferentiable):
+class TwiceDifferentiable(Differentiable):
 
     ''' Twice continously differentiable function. '''
 
