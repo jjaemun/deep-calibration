@@ -2,7 +2,7 @@
 # type: ignore
 
 
-from ..functional import ContinuouslyDifferentiable
+from ..functional import Differentiable
 
 
 from .. import *
@@ -26,7 +26,7 @@ class NewtonRaphson(object):
        self.criterion = criterion
 
 
-    def step(self, func: ContinuouslyDifferentiable, guess: ...) -> Iterate:
+    def step(self, func: Differentiable, guess: ...) -> Iterate:
 
         ''' Computes single step. '''
 
@@ -40,7 +40,7 @@ class NewtonRaphson(object):
         )
 
 
-    def optimize(self, func: ContinuouslyDifferentiable, guess: ...) -> List[Iterate]:
+    def optimize(self, func: Differentiable, guess: ...) -> List[Iterate]:
 
         ''' Computes full optimization. '''
         
