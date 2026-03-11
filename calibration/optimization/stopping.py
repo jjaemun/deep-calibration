@@ -103,7 +103,7 @@ class RelativeImprovementNorm(Criterion):
 
     def check(self, iterates: List[Iterate]):
         # first iteration!
-        if len(iterates <= 1):
+        if (len(iterates) <= 1):
             return False
 
         prev = torch.norm(iterates[-2].f)
